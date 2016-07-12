@@ -1,0 +1,17 @@
+# This is the configuration used to check the rubocop source code.
+# Check out: https://github.com/bbatsov/rubocop
+
+AllCops:
+  TargetRubyVersion: 2.3
+
+  Include:
+    - '**/config.ru'
+  Exclude:
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'db/schema.rb'
+Rails:
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false
