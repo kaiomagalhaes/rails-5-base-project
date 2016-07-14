@@ -47,6 +47,9 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     brakeman (3.3.2)
     builder (3.2.2)
+    bundler-audit (0.5.0)
+      bundler (~> 1.2)
+      thor (~> 0.18)
     byebug (9.0.5)
     codeclimate-engine-rb (0.3.1)
       virtus (~> 1.0)
@@ -220,6 +223,7 @@ PLATFORMS
 
 DEPENDENCIES
   brakeman
+  bundler-audit
   byebug
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)
