@@ -32,6 +32,7 @@ group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
   gem 'rubocop-rspec'
+  gem 'rubocop', require: false
 end
 
 group :development do
@@ -39,7 +40,6 @@ group :development do
   gem 'web-console', '~> 3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'rubocop', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
