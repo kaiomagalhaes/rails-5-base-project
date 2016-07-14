@@ -34,6 +34,7 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'rubocop-rspec', :require => false
   gem "rubycritic", :require => false
+  gem 'brakeman', :require => false
 end
 
 group :development do
