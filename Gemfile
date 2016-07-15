@@ -36,6 +36,7 @@ group :development, :test do
   gem "rubycritic", :require => false
   gem 'brakeman', :require => false
   gem 'bundler-audit', :require => false
+  gem 'factory_girl_rails'
 end
 
 group :test do
