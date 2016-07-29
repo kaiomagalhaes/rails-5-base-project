@@ -86,9 +86,9 @@ What to do:
 
 setup your gemfile
 ```
-group :development, :test do
-    gem 'rubocop-rspec'
-end
+group :development, :test do 
+  gem 'rubycritic' 
+end 
 ```
 run
 
