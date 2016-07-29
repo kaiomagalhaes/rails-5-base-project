@@ -35,7 +35,7 @@ run
 
 `rubocop --auto-gen-config`
 
-It is going to generate a `.rubocop-todo.yml` file. Remove it and add the following content on it
+It is going to generate a `.rubocop-todo.yml` file. Rename it to .rubocop.yml and add the following content on it
 ```
 # This is the configuration used to check the rubocop source code.
 # Check out: https://github.com/bbatsov/rubocop
@@ -137,7 +137,7 @@ Repo:
 setup your gemfile
 ```
 group :development, :test do
-    gem 'bundler-audit', :require => false
+    gem 'simplecov', :require => false
 end
 ```
 do
