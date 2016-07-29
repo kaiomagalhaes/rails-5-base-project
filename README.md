@@ -54,6 +54,9 @@ Rails:
 
 Style/Documentation:
   Enabled: false
+  
+Metrics/LineLength:
+  Max: 120
 ```
 
 Now run `rubocop` and start to fix the issues, it is easier if you run `rubocop -a`.
