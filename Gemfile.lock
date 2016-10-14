@@ -47,6 +47,9 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     brakeman (3.4.0)
     builder (3.2.2)
+    bullet (5.3.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.10.0)
     bundler-audit (0.5.0)
       bundler (~> 1.2)
       thor (~> 0.18)
@@ -228,6 +231,7 @@ GEM
     uglifier (3.0.2)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.1.1)
+    uniform_notifier (1.10.0)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -247,6 +251,7 @@ PLATFORMS
 
 DEPENDENCIES
   brakeman
+  bullet
   bundler-audit
   byebug
   coffee-rails (~> 4.2)
