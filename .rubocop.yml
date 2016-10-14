@@ -8,9 +8,13 @@ AllCops:
   Include:
     - '**/config.ru'
   Exclude:
+    - 'bin/**/*'
     - 'vendor/**/*'
     - 'db/**/*'
     - 'db/schema.rb'
+Metrics/LineLength:
+  Max: 120
+
 Rails:
   Enabled: true
 

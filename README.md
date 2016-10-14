@@ -195,3 +195,17 @@ end
 
 Default factories directory is `test/factories`, or `spec/factories` if test_framework generator is set to `:rspec`
 
+# Bullet
+
+Repo:
+    `https://github.com/flyerhzm/bullet`
+
+setup your gemfile
+```
+group :development do
+  gem 'bullet'
+end
+```
+
+Configurations go into `config/environments/development.rb`.
+
