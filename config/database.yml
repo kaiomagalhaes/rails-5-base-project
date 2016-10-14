@@ -1,18 +1,18 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: db
+  host: localhost
   pool: 5
   user: postgres
   password: postgres
 
 development:
   <<: *default
-  database: sso_development
+  database: rails5-base-project-dev
 
 test:
   <<: *default
-  database: sso_test
+  database: rails5-base-project-test
 
 production:
   <<: *default
