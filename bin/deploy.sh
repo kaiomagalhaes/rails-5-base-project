@@ -12,12 +12,11 @@ scp config/docker-compose.yml.template $DEPLOY_USER@$DEPLOY_HOST:projects/rails-
 echo "pulling latest version of the code"
 ssh $DEPLOY_USER@$DEPLOY_HOST "docker-compose -f projects/rails-base-project/config/docker-compose.yml.backend pull rails-base-project"
 
+echo "creating network"
+ssh $DEPLOY_USER@$DEPLOY_HOST 'if [ $(docker network ls | grep NETWORK_NAME | wc -l) -gt 0 ]; then echo "network already exists"; else docker network create NETWORK_NAME ; fi'
+
 echo "starting the new version"
 ssh $DEPLOY_USER@$DEPLOY_HOST 'docker-compose -f projects/rails-base-project/config/docker-compose.yml.backend up -d rails-base-project'
-
-echo "creating network"
-ssh $DEPLOY_USER@$DEPLOY_HOST 'if [ $(docker network ls | grep kaiomagalhaes | wc -l) -gt 0 ]; then echo "network already exists"; else docker network create kaiomagalhaes ; fi'
-
 
 echo "removing old and unsed images"
 ssh $DEPLOY_USER@$DEPLOY_HOST "docker images --filter 'dangling=true' --format '{{.ID}}' | xargs docker rmi"
