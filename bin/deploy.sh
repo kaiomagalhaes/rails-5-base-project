@@ -9,6 +9,9 @@ ssh $DEPLOY_USER@$DEPLOY_HOST 'mkdir -p projects/PROJECT_NAME/config'
 echo "copying docker-compose"
 scp config/docker-compose.yml.template $DEPLOY_USER@$DEPLOY_HOST:projects/PROJECT_NAME/config/docker-compose.yml.backend
 
+echo "copying env file"
+scp .env $DEPLOY_USER@$DEPLOY_HOST:projects/PROJECT_NAME/config/.env
+
 echo "pulling latest version of the code"
 ssh $DEPLOY_USER@$DEPLOY_HOST "docker-compose -f projects/PROJECT_NAME/config/docker-compose.yml.backend pull PROJECT_NAME"
 
