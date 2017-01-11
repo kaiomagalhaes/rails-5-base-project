@@ -8,7 +8,7 @@ dependencies:
     - gem install bundler
 database:
   override:
-    - mv config/database.yml.example config/database.yml
+    - mv config/database.ci.yml config/database.yml
     - bundle exec rake db:create db:schema:load --trace
 
 test:

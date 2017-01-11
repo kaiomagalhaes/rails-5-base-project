@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  pool: 5
+  user: postgres
+  password: postgres
+
+development:
+  <<: *default
+  database: rails-base-test
+
+test:
+  <<: *default
+  database: rails-base-test
+
+production:
+  <<: *default
+  host: rails-base-project-db
+  database: <%= ENV['RAILS_DATABASE_NAME'] %>
+  user: <%= ENV['RAILS_DATABASE_USER'] %>
+  password: <%= ENV['RAILS_DATABASE_PASSWORD'] %>
