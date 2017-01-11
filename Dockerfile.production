@@ -1,23 +1,14 @@
 # This is our PRODUCTION dockerfile.
-#
-# This uses Codelitt's Ruby image found at:
-# https://github.com/codelittinc/dockerfiles/blob/master/ruby/Dockerfile
-FROM codelittinc/ruby:2.3-phusion
-MAINTAINER Codelitt, Inc.
+FROM ruby:2.3
 
-# Install dependencies and rails-api
-RUN apt-get update
-RUN apt-get install -y python-software-properties \
-    python g++ make software-properties-common
 RUN apt-get update \
-    && apt-get install imagemagick -y \
-    && apt-get install -y qt5-default libqt5webkit5-dev
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
-    && apt-get install -y nodejs
+    && apt-get install nodejs -y \
+    && apt-get install -y libqt4-webkit libqt4-dev xvfb \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN gem install bundler
 
-EXPOSE 4000
+EXPOSE 3000
 ENV RAILS_ENV production
 ENV NODE_ENV production
 # TODO: Move key to secrets storage (To be decided)
@@ -31,4 +22,4 @@ RUN bundle install --without development
 
 ADD ./ /share
 
-CMD rails s Puma -b 0.0.0.0 -e production -p 4000
+CMD rails s Puma -b 0.0.0.0 -e production -p 3000
