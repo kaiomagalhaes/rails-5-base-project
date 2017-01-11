@@ -3,6 +3,8 @@ services:
   PROJECT_NAME:
     container_name: PROJECT_NAME
     image: DOCKERHUB_COMPANY_NAME/PROJECT_NAME
+    env_file:
+      - .env
 
   db:
     image: postgres

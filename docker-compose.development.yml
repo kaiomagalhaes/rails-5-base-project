@@ -4,7 +4,7 @@ services:
     image: postgres
     container_name: rails-base-dev-db
     env_file:
-      - ./config/application.env
+      - .env
 
   app:
     container_name: rails-base-dev-app
@@ -18,7 +18,7 @@ services:
       - .:/share
 
     env_file:
-      - ./config/application.env
+      - .env
 
     ports:
       - '3000:3000'
