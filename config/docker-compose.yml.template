@@ -1,0 +1,9 @@
+version: '2'
+services:
+  rails-base-project:
+    container_name: rails-base-project
+    image: kaiocristian/rails-base-project
+networks:
+  default:
+    external:
+      name: kaiocristian
