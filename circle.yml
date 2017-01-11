@@ -20,9 +20,12 @@ deployment:
     commands:
       - cp Dockerfile.production Dockerfile
       - cp env.example .env
-      - sed -i "s/POSTGRES_USER\:/POSTGRES_USER: $DATABASE_USER/g" .env
-      - sed -i "s/POSTGRES_PASSWORD\:/POSTGRES_PASSWORD: $DATABASE_PASSWORD/g" .env
-      - sed -i "s/DATABASE_NAME\:/DATABASE_NAME: $DATABASE_NAME/g" .env
+      - |
+        sed -i "s/POSTGRES_USER\:/POSTGRES_USER: $DATABASE_USER/g" .env
+      - |
+        sed -i "s/POSTGRES_PASSWORD\:/POSTGRES_PASSWORD: $DATABASE_PASSWORD/g" .env
+      - |
+        sed -i "s/DATABASE_NAME\:/DATABASE_NAME: $DATABASE_NAME/g" .env
       - docker build -t kaiomagalhaes/rails-base-project:latest .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push kaiomagalhaes/rails-base-project:latest
