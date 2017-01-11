@@ -6,7 +6,7 @@ services:
     env_file:
       - .env
 
-  db:
+  PROJECT_NAME-db:
     image: postgres
     container_name: PROJECT_NAME-db
     env_file:
