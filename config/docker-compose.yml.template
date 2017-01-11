@@ -2,8 +2,9 @@ version: '2'
 services:
   PROJECT_NAME:
     container_name: PROJECT_NAME
-    image: kaiomagalhaes/PROJECT_NAME
+    image: DOCKERHUB_COMPANY_NAME/PROJECT_NAME
+
 networks:
   default:
     external:
-      name: kaiomagalhaes
+      name: DOCKERHUB_COMPANY_NAME

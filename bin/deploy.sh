@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "inserting the image version in docker-compose template"
-bash -c 'sed -i "s/kaiomagalhaes\/PROJECT_NAME/kaiomagalhaes\/PROJECT_NAME:$VERSION/" config/docker-compose.yml.template'
+bash -c 'sed -i "s/DOCKERHUB_COMPANY_NAME\/PROJECT_NAME/DOCKERHUB_COMPANY_NAME\/PROJECT_NAME:$VERSION/" config/docker-compose.yml.template'
 
 echo "creating projects folder if it doesn't exist"
 ssh $DEPLOY_USER@$DEPLOY_HOST 'mkdir -p projects/PROJECT_NAME/config'
