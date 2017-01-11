@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "inserting the image version in docker-compose template"
-bash -c 'sed -i "s/kaiocristian\/rails-base-project/kaiocristian\/rails-base-project:$VERSION/" config/docker-compose.yml.template'
+bash -c 'sed -i "s/kaiomagalhaes\/rails-base-project/kaiomagalhaes\/rails-base-project:$VERSION/" config/docker-compose.yml.template'
 
 echo "copying docker-compose"
 scp config/docker-compose.yml.template $DEPLOY_USER@$DEPLOY_HOST:/opt/rails-base-project/config/docker-compose.yml.backend
