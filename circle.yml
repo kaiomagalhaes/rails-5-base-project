@@ -8,6 +8,7 @@ dependencies:
     - gem install bundler
 database:
   override:
+    - sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" config/database.ci.yml
     - mv config/database.ci.yml config/database.yml
     - bundle exec rake db:create db:schema:load --trace
 
