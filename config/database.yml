@@ -6,15 +6,15 @@ default: &default
   user: postgres
   password: postgres
 
-development:
-  <<: *default
-  database: rails5-base-project-dev
+  development:
+    <<: *default
+    database: rails5-base-project-dev
 
-test:
-  <<: *default
-  database: rails5-base-project-test
+  test:
+    <<: *default
+    database: rails5-base-project-test
 
-production:
-  <<: *default
-  database: postgres
-  password: postgres
+  production:
+    <<: *default
+    database: postgres
+    password: postgres
