@@ -1,15 +1,39 @@
-FROM ruby:2.3
+FROM phusion/baseimage:0.9.18
+MAINTAINER Codelitt, Inc.
 
-RUN apt-get update \
-    && apt-get install nodejs -y \
-    && apt-get install -y --no-install-recommends \
-        postgresql-client \
-    && apt-get install sqlite3 libsqlite3-dev -y \
-    && rm -rf /var/lib/apt/lists/*
+# Use baseimage-docker's init system.
+CMD ["/sbin/my_init"]
 
-WORKDIR /share
-COPY Gemfile* ./
+ENV LANGUAGE en_US.UTF-8
+
+# Install os dependencies
+RUN apt-add-repository ppa:brightbox/ruby-ng
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install -y nodejs \
+    ruby2.3 \
+    ruby2.3-dev \
+    build-essential \
+    curl \
+    zlib1g-dev \
+    libssl-dev \
+    libreadline-dev \
+    libyaml-dev \
+    libxml2-dev \
+    libxslt-dev \
+    libpq-dev
+
+RUN gem install bundler
+
+ENV APP_HOME /share
+ENV RACK_ENV development
+
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
+
+ADD Gemfile* $APP_HOME/
 RUN bundle install
-COPY . .
 
-EXPOSE 3000
+ADD ./ /share
+
+ENV PORT 3000
