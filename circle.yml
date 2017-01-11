@@ -6,6 +6,11 @@ machine:
 dependencies:
   pre:
     - gem install bundler
+database:
+  override:
+    - mv config/database.yml.example config/database.yml
+    - bundle exec rake db:create db:schema:load --trace
+
 test:
   override:
     - bundle exec rspec
