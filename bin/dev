@@ -1,0 +1,5 @@
+#MAINTAINER Kaio Magalhaes, Inc.
+#
+docker-compose -f docker-compose.development.yml up -d
+docker exec -it rails-base-dev-app bash
+
