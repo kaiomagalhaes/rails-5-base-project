@@ -24,6 +24,12 @@ ssh $DEPLOY_USER@$DEPLOY_HOST 'if [ $(docker ps -a | grep PROJECT_NAME-db | wc -
 echo "starting the new version"
 ssh $DEPLOY_USER@$DEPLOY_HOST 'docker-compose -f projects/PROJECT_NAME/config/docker-compose.yml.backend up -d PROJECT_NAME'
 
+echo "create database if it doesn't exist"
+ssh $DEPLOY_USER@$DEPLOY_HOST 'docker exec PROJECT_NAME bundle exec rake db:create'
+
+echo "running migrations"
+ssh $DEPLOY_USER@$DEPLOY_HOST 'docker exec PROJECT_NAME bundle exec rake db:migrate'
+
 echo "removing old and unsed images"
 ssh $DEPLOY_USER@$DEPLOY_HOST "docker images --filter 'dangling=true' --format '{{.ID}}' | xargs docker rmi"
 
