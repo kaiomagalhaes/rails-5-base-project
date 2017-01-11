@@ -1,27 +1,9 @@
-FROM phusion/baseimage:0.9.19
-MAINTAINER Codelitt, Inc.
+FROM ruby:2.3
 
-# Use baseimage-docker's init system.
-CMD ["/sbin/my_init"]
-
-ENV LANGUAGE en_US.UTF-8
-
-# Install os dependencies
-RUN apt-add-repository ppa:brightbox/ruby-ng
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install -y nodejs \
-    ruby2.3 \
-    ruby2.3-dev \
-    build-essential \
-    curl \
-    zlib1g-dev \
-    libssl-dev \
-    libreadline-dev \
-    libyaml-dev \
-    libxml2-dev \
-    libxslt-dev \
-    libpq-dev
+RUN apt-get update \
+    && apt-get install nodejs -y \
+    && apt-get install -y libqt4-webkit libqt4-dev xvfb \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN gem install bundler
 
