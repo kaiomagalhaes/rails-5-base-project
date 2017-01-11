@@ -6,6 +6,9 @@ services:
     env_file:
       - .env
 
+    ports:
+      - '3000:3000'
+
   PROJECT_NAME-db:
     image: postgres
     container_name: PROJECT_NAME-db
