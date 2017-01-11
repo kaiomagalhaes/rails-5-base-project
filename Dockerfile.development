@@ -11,8 +11,8 @@ RUN apt-add-repository ppa:brightbox/ruby-ng
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y nodejs \
-    ruby2.3 \
-    ruby2.3-dev \
+    ruby2.2 \
+    ruby2.2-dev \
     build-essential \
     curl \
     zlib1g-dev \
