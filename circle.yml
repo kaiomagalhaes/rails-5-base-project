@@ -8,4 +8,14 @@ dependencies:
     - gem install bundler
 test:
   override:
-    - bundle exec rake test
+    - bundle exec rspec
+deployment:
+  qa:
+    branch: develop
+    commands:
+      - cp Dockerfile.production Dockerfile
+      - cp env.example .env
+      - docker build -t docker pull kaiocristian/rails-base-project:latest .
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push kaiocristian/rails-base-project:latest
+      - DEPLOY_USER=$QA_DEPLOY_USER DEPLOY_HOST=$QA_DEPLOY_HOST VERSION=latest sh bin/deploy.sh
