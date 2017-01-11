@@ -1,23 +1,34 @@
-FROM ruby:2.3
+# This is our PRODUCTION dockerfile.
+#
+# This uses Codelitt's Ruby image found at:
+# https://github.com/codelittinc/dockerfiles/blob/master/ruby/Dockerfile
+FROM codelittinc/ruby:2.3-phusion
+MAINTAINER Codelitt, Inc.
 
+# Install dependencies and rails-api
+RUN apt-get update
+RUN apt-get install -y python-software-properties \
+    python g++ make software-properties-common
 RUN apt-get update \
-    && apt-get install nodejs -y \
-    && apt-get install -y libqt4-webkit libqt4-dev xvfb \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get install imagemagick -y \
+    && apt-get install -y qt5-default libqt5webkit5-dev
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+    && apt-get install -y nodejs
 
 RUN gem install bundler
 
-ENV APP_HOME /share
-ENV RACK_ENV production
+EXPOSE 4000
+ENV RAILS_ENV production
+ENV NODE_ENV production
+# TODO: Move key to secrets storage (To be decided)
+ENV SECRET_KEY_BASE c2291c2d63b4acb27bb6b08d9b7f36de68b519a3d55de7fed564b890021356fc8d703c1e494efd0ce0525e607e52a182064ed5ffc266114a992eb0b45bf9cc77
 
-RUN mkdir $APP_HOME
-WORKDIR $APP_HOME
+WORKDIR /share
+ADD Gemfile /share/Gemfile
+ADD Gemfile.lock /share/Gemfile.lock
+RUN bundle install --without development
 
-ADD Gemfile* $APP_HOME/
-RUN bundle install
 
 ADD ./ /share
 
-ENV PORT 3000
-
-CMD ["/bin/bash", "-l", "-c", "bundle exec rails s Puma -b 0.0.0.0 -e production -p 3000"]
+CMD rails s Puma -b 0.0.0.0 -e production -p 4000
