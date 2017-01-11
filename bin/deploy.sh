@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
 
 echo "inserting the image version in docker-compose template"
-bash -c 'sed -i "s/kaiomagalhaes\/rails-base-project/kaiomagalhaes\/rails-base-project:$VERSION/" config/docker-compose.yml.template'
+bash -c 'sed -i "s/kaiomagalhaes\/PROJECT_NAME/kaiomagalhaes\/PROJECT_NAME:$VERSION/" config/docker-compose.yml.template'
 
 echo "creating projects folder if it doesn't exist"
-ssh $DEPLOY_USER@$DEPLOY_HOST 'mkdir -p projects/rails-base-project/config'
+ssh $DEPLOY_USER@$DEPLOY_HOST 'mkdir -p projects/PROJECT_NAME/config'
 
 echo "copying docker-compose"
-scp config/docker-compose.yml.template $DEPLOY_USER@$DEPLOY_HOST:projects/rails-base-project/config/docker-compose.yml.backend
+scp config/docker-compose.yml.template $DEPLOY_USER@$DEPLOY_HOST:projects/PROJECT_NAME/config/docker-compose.yml.backend
 
 echo "pulling latest version of the code"
-ssh $DEPLOY_USER@$DEPLOY_HOST "docker-compose -f projects/rails-base-project/config/docker-compose.yml.backend pull rails-base-project"
+ssh $DEPLOY_USER@$DEPLOY_HOST "docker-compose -f projects/PROJECT_NAME/config/docker-compose.yml.backend pull PROJECT_NAME"
 
 echo "creating network"
 ssh $DEPLOY_USER@$DEPLOY_HOST 'if [ $(docker network ls | grep NETWORK_NAME | wc -l) -gt 0 ]; then echo "network already exists"; else docker network create NETWORK_NAME ; fi'
 
 echo "starting the new version"
-ssh $DEPLOY_USER@$DEPLOY_HOST 'docker-compose -f projects/rails-base-project/config/docker-compose.yml.backend up -d rails-base-project'
+ssh $DEPLOY_USER@$DEPLOY_HOST 'docker-compose -f projects/PROJECT_NAME/config/docker-compose.yml.backend up -d PROJECT_NAME'
 
 echo "removing old and unsed images"
 ssh $DEPLOY_USER@$DEPLOY_HOST "docker images --filter 'dangling=true' --format '{{.ID}}' | xargs docker rmi"
