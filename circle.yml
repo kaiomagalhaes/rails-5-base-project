@@ -19,6 +19,5 @@ deployment:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push kaiomagalhaes/rails-base-project:latest
       - sed -i "s/NETWORK_NAME/$NETWORK_NAME/g" bin/deploy.sh
-      - sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" bin/deploy.sh
-      - sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" config/docker-compose-yml.template
+      - sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" config/docker-compose.yml.template bin/deploy.sh
       - NETWORK_NAME=QA_NETWORK_NAME DEPLOY_USER=$QA_DEPLOY_USER DEPLOY_HOST=$QA_DEPLOY_HOST PROJET_NAME=rails-base-project VERSION=latest sh bin/deploy.sh
