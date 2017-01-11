@@ -20,4 +20,4 @@ ADD ./ /share
 
 ENV PORT 3000
 
-CMD ["/bin/bash", "-l", "-c", "rails s Puma -b 0.0.0.0 -e production -p 3000"]
+CMD ["/bin/bash", "-l", "-c", "bundle exec rails s Puma -b 0.0.0.0 -e production -p 3000"]
