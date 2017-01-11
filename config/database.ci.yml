@@ -17,6 +17,6 @@ test:
 production:
   <<: *default
   host: rails-base-project-db
-  database: <%= ENV['RAILS_DATABASE_NAME'] %>
-  user: <%= ENV['RAILS_DATABASE_USER'] %>
-  password: <%= ENV['RAILS_DATABASE_PASSWORD'] %>
+  database: <%= ENV['DATABASE_NAME'] %>
+  user: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
