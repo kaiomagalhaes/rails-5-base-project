@@ -4,6 +4,12 @@ services:
     container_name: PROJECT_NAME
     image: DOCKERHUB_COMPANY_NAME/PROJECT_NAME
 
+  db:
+    image: postgres
+    container_name: PROJECT_NAME-db
+    env_file:
+      - .env
+
 networks:
   default:
     external:
