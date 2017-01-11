@@ -11,7 +11,7 @@ test:
     - bundle exec rspec
 deployment:
   qa:
-    branch: develop
+    branch: master
     commands:
       - cp Dockerfile.production Dockerfile
       - cp env.example .env
