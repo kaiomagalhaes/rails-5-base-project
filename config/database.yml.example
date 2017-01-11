@@ -3,8 +3,8 @@ default: &default
   encoding: unicode
   host: db
   pool: 5
-  user: <%= ENV['RAILS_DATABASE_USER'] %>
-  password: <%= ENV['RAILS_DATABASE_PASSWORD'] %>
+  user: postgres
+  password: postgres
 
 development:
   <<: *default
@@ -17,3 +17,5 @@ test:
 production:
   <<: *default
   database: <%= ENV['RAILS_DATABASE_NAME'] %>
+  user: <%= ENV['RAILS_DATABASE_USER'] %>
+  password: <%= ENV['RAILS_DATABASE_PASSWORD'] %>

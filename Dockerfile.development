@@ -1,3 +1,4 @@
+# This is our PRODUCTION dockerfile.
 FROM ruby:2.3
 
 RUN apt-get update \
@@ -7,15 +8,12 @@ RUN apt-get update \
 
 RUN gem install bundler
 
-VOLUME ["/share"]
+EXPOSE 3000
+
 WORKDIR /share
+ADD Gemfile /share/Gemfile
+ADD Gemfile.lock /share/Gemfile.lock
+RUN bundle install --with development
 
-ENV BUNDLE_PATH /box
 
-ADD Gemfile* $APP_HOME/
-RUN bundle install
-
-CMD ["/bin/bash", "-l"]
-
-# Clean up APT when done.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+ADD ./ /share
