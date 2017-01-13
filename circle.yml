@@ -48,4 +48,4 @@ deployment:
       - sed -i "s/DOCKERHUB_COMPANY_NAME/$DOCKERHUB_COMPANY_NAME/g" config/docker-compose.yml.template bin/deploy.sh
       - sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" config/docker-compose.yml.template bin/deploy.sh
       - sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" config/docker-compose.yml.template bin/deploy.sh
-      - NETWORK_NAME=QA_NETWORK_NAME DEPLOY_USER=$QA_DEPLOY_USER DEPLOY_HOST=$QA_DEPLOY_HOST VERSION=$CIRCLE_TAG sh bin/deploy.sh
+      - NETWORK_NAME=QA_NETWORK_NAME DEPLOY_USER=$PROD_DEPLOY_USER DEPLOY_HOST=$PROD_DEPLOY_HOST VERSION=$CIRCLE_TAG sh bin/deploy.sh
