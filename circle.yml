@@ -14,7 +14,9 @@ database:
 
 test:
   override:
+    - bundle exec rubocop
     - bundle exec rspec
+
 deployment:
   qa:
     branch: /.*/
