@@ -1,3 +1,9 @@
+[![CircleCI](https://circleci.com/gh/kaiomagalhaes/rails-5-base-project.svg?style=svg)](https://circleci.com/gh/kaiomagalhaes/rails-5-base-project)
+
+This is a rails 5 base project, the gem update was in: 15/01/2017.
+
+Here we have the following gems being used:
+
 # Rspec Rails
 
 Repo:
