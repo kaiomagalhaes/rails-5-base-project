@@ -18,36 +18,11 @@ test:
     - bundle exec rspec
 
 deployment:
-  qa:
-    branch: /.*/
+  dev:
+    branch: /^(?!(master|homolog|develop|qa)).*/
     commands:
-      - cp Dockerfile.production Dockerfile
-      - cp env.example .env
-      - sed -i "s/POSTGRES_USER=/POSTGRES_USER=$QA_DATABASE_USER/g" .env
-      - sed -i "s/POSTGRES_PASSWORD=/POSTGRES_PASSWORD=$QA_DATABASE_PASSWORD/g" .env
-      - sed -i "s/DATABASE_NAME=/DATABASE_NAME=$QA_DATABASE_NAME/g" .env
-      - docker build -t kaiomagalhaes/rails-base-project:latest .
-      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker push kaiomagalhaes/rails-base-project:latest
-      - sed -i "s/NETWORK_NAME/$DOCKERHUB_COMPANY_NAME/g" bin/deploy.sh
-      - sed -i "s/DOCKERHUB_COMPANY_NAME/$DOCKERHUB_COMPANY_NAME/g" config/docker-compose.yml.template bin/deploy.sh
-      - sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" config/docker-compose.yml.template bin/deploy.sh
-      - sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" config/docker-compose.yml.template bin/deploy.sh
-      - NETWORK_NAME=QA_NETWORK_NAME DEPLOY_USER=$QA_DEPLOY_USER DEPLOY_HOST=$QA_DEPLOY_HOST VERSION=latest sh bin/deploy.sh
-
-  production:
-    tag: /version-.*/
-    commands:
-      - cp Dockerfile.production Dockerfile
-      - cp env.example .env
-      - sed -i "s/POSTGRES_USER=/POSTGRES_USER=$PROD_DATABASE_USER/g" .env
-      - sed -i "s/POSTGRES_PASSWORD=/POSTGRES_PASSWORD=$PROD_DATABASE_PASSWORD/g" .env
-      - sed -i "s/DATABASE_NAME=/DATABASE_NAME=$PROD_DATABASE_NAME/g" .env
-      - docker build -t kaiomagalhaes/rails-base-project:$CIRCLE_TAG .
-      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker push kaiomagalhaes/rails-base-project:$CIRCLE_TAG
-      - sed -i "s/NETWORK_NAME/$DOCKERHUB_COMPANY_NAME/g" bin/deploy.sh
-      - sed -i "s/DOCKERHUB_COMPANY_NAME/$DOCKERHUB_COMPANY_NAME/g" config/docker-compose.yml.template bin/deploy.sh
-      - sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" config/docker-compose.yml.template bin/deploy.sh
-      - sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" config/docker-compose.yml.template bin/deploy.sh
-      - NETWORK_NAME=QA_NETWORK_NAME DEPLOY_USER=$PROD_DEPLOY_USER DEPLOY_HOST=$PROD_DEPLOY_HOST VERSION=$CIRCLE_TAG sh bin/deploy.sh
+      - heroku maintenance:on --app exercise-rec-dev
+      - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
+      - git push -f git@heroku.com:exercise-rec-dev.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app exercise-rec-dev
+      - heroku maintenance:off --app exercise-rec-dev
