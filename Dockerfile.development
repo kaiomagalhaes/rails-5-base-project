@@ -1,9 +1,9 @@
 # This is our PRODUCTION dockerfile.
-FROM ruby:2.3
+FROM ruby:2.5
 
 RUN apt-get update \
     && apt-get install nodejs -y \
-    && apt-get install -y libqt4-webkit libqt4-dev xvfb \
+    && apt-get install -y libqtwebkit4 libqt4-dev xvfb \
     && rm -rf /var/lib/apt/lists/*
 
 RUN gem install bundler
